@@ -39,15 +39,16 @@ public class ProfileWithdrawalAdapter extends RecyclerView.Adapter<ProfileWithdr
 
     @Override
     public void onBindViewHolder(ProfileWithdrawalViewHolder holder, int position) {
-        NumberFormat currentFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        DecimalFormat fmt = new DecimalFormat("#,##0.00;-#");
+
 
         ProfileWithdrawal item = items.get(position);
         holder.account.setText(item.account);
-        holder.balance.setText(currentFormat.format(Double.parseDouble(item.balance)));
-        holder.retrieval.setText(currentFormat.format(Double.parseDouble(item.retrieval)));
+        holder.balance.setText("R$" +fmt.format(Double.parseDouble(item.balance)));
+        holder.retrieval.setText("R$" +fmt.format(Double.parseDouble(item.retrieval)));
 
         holder.total.setText(
-                currentFormat.format(Double.parseDouble(item.balance) - Double.parseDouble(item.retrieval))
+                "R$" +fmt.format(Double.parseDouble(item.balance) - Double.parseDouble(item.retrieval))
         );
     }
 
